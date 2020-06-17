@@ -14,7 +14,6 @@ def bytype():
     path = input("enter path directory :-")
 
     lis = os.listdir(path)
-
     lis.sort(key=lambda x: os.stat(os.path.join(path, x)).st_mtime)
 
     # List only the files in the folder
@@ -68,14 +67,10 @@ def bytype():
 def bydate():
 
     path = input("enter path directory :-")
-
     lis = os.listdir(path)
-
     lis.sort(key=lambda x: os.stat(os.path.join(path, x)).st_mtime)
-
     files = [f for f in os.listdir(
         path) if os.path.isfile(os.path.join(path, f))]
-
     os.chdir(path)
 
     for x in files:
@@ -98,47 +93,17 @@ def bydate():
             shutil.move(os.path.join(path, x), modified_date)
 
 
-# this function is used to count the files
-
-def count_files():
-
-    # Path where we have to count files and directories
-
-    path = input("enter the path :-")
-
-    n = 0
-
-    for base, dirs, files in os.walk(path):
-
-        print('Looking in : ', base)
-
-        for Files in files:
-
-            n += 1
-
-    print('Number of files', n)
-
-
 # this function is used to know the size
-
-
 def size():
 
     path = input("enter your directory path:-")
-
     size = 0
-
     fsizedicr = {'Megabytes': float(
         1)/(1024*1024)}
-
     for (path, dirs, files) in os.walk(path):
-
         for file in files:
-
             filename = os.path.join(path, file)
-
             size += os.path.getsize(filename)
-
     for key in fsizedicr:
         if(key == "Megabytes"):
             print("Folder Size: " + str(round(fsizedicr[key]*size, 2)) + " MB")
@@ -146,9 +111,8 @@ def size():
 
 print("""Type byext to organize by their extension
         Type bydate to organize by their date
-        Type fcount to count no of files
-        Type fsize to know file size
-""")
+        Type fsize to know file size""")
+
 
 op = input("ENTER YOUR OPTION:-")
 
@@ -157,9 +121,6 @@ if op == "byext":
 
 elif op == "bydate":
     bydate()
-
-elif op == "fcount":
-    count_files()
 
 elif op == "fsize":
     size()
